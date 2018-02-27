@@ -11,3 +11,6 @@ npm-debug.log
 yarn-error.log
 .env
 public/.htaccess.local
+public/fonts/
+public/mix-manifest.json
+

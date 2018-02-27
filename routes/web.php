@@ -12,5 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.default');
+    return view('photographer.home');
 });
+	Route::get('/home', function () {
+		return view('photographer.gallery');
+	});
+
+//Route::resource('mypage', 'photographerController');
