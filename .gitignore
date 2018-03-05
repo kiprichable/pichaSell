@@ -12,5 +12,7 @@ yarn-error.log
 .env
 public/.htaccess.local
 public/fonts/
+public/WatermarkedImages/*
+public/OriginalImages/*
 public/mix-manifest.json
 

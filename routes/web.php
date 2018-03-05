@@ -19,3 +19,9 @@ Route::get('/', function () {
 	});
 
 //Route::resource('mypage', 'photographerController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('photos', 'photoController');
+Route::resource('albums', 'albumController');
