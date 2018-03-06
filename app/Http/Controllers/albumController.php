@@ -11,8 +11,6 @@
 	use Illuminate\Support\Facades\Auth;
 	use Intervention\Image\Facades\Image;
 	use Illuminate\Support\Facades\Session;
-	use Illuminate\Support\Facades\Storage;
-	use function redirect;
 	
 	class albumController extends Controller
 	{
@@ -29,7 +27,7 @@
 		 */
 		public function index()
 		{
-			return view('albumManagement.index');
+			return view('albumManagement.index')->withAlbums(Album::all());
 		}
 		
 		/**
@@ -88,7 +86,8 @@
 		 */
 		public function show($id)
 		{
-			return view('albumManagement.show')->withAlbum(Album::find($id));
+			return view('albumManagement.show')
+				->withAlbum(Album::find($id));
 		}
 		
 		/**
@@ -130,9 +129,9 @@
 			foreach($photos as $photo)
 			{
 				//delete original image
-				Storage::delete(public_path().$photo->original.'/'.$photo->name);
+				unlink($photo->original.'/'.$photo->name);
 				//delete watermarked image
-				Storage::delete(public_path().$photo->watermarked.'/'.$photo->name);
+				unlink($photo->watermarked.'/'.$photo->name);
 				//delete photo
 				$photo->delete();
 			}
@@ -142,8 +141,6 @@
 			Session::flash('Success','Album deleted successfully');
 			//redirect to all albums
 			return redirect('albums');
-			
-			
 		}
 		
 		public function uploadOriginalImage($img,$path)

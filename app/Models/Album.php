@@ -10,6 +10,6 @@ class Album extends Model
 	
 	public function photos()
 	{
-		return $this->belongsTo('App\Models\Photo');
+		return $this->hasMany('App\Models\Photo');
 	}
 }

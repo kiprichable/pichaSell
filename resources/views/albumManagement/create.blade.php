@@ -1,6 +1,15 @@
 @extends('layouts.app1')
 @section('content')
-
+    @if(Session::has('Success'))
+        <div class="alert alert-success" role="alert">
+            <strong>{{Session::get('Success')}} </strong>
+        </div>
+    @endif
+    @if(Session::has('Error'))
+        <div class="alert alert-danger" role="alert">
+            <strong> {{Session::get('Error')}} </strong>
+        </div>
+    @endif
     <div class="container" style="margin-top:10%">
         <div class="centered-form">
             <div class="col-lg-12">

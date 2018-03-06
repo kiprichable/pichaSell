@@ -1,5 +1,15 @@
 @extends('layouts.app1')
 @section('content')
+    @if(Session::has('Success'))
+        <div class="alert alert-success" role="alert">
+            <strong>{{Session::get('Success')}} </strong>
+        </div>
+    @endif
+    @if(Session::has('Error'))
+        <div class="alert alert-danger" role="alert">
+            <strong> {{Session::get('Error')}} </strong>
+        </div>
+    @endif
         <div class="container gallery-container">
             <div class="page-header">
                 <a href={{URL::asset('albums')}}>&laquo; Back to Albums</a>
@@ -13,53 +23,13 @@
             <div class="tz-gallery">
 
                 <div class="row">
-
-                    {{--for each album photos--}}
+                    @foreach($album->photos()->get() as $photo)
                     <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
+                        <a class="lightbox" href="{{URL::Asset('/').$photo->watermarked.'/'.$photo->name}}">
+                            <img src="{{URL::Asset('/').$photo->watermarked.'/'.$photo->name}}" alt="watermarked">
                         </a>
                     </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
-                        </a>
-                    </div>
-                    <div class="col-sm-12 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="{{URL::Asset('img/1.jpg')}}">
-                            <img src="{{URL::Asset('img/1.jpg')}}" alt="Park">
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
 
             </div>

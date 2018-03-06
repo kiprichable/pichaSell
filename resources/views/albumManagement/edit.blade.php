@@ -1,5 +1,15 @@
 @extends('layouts.app1')
 @section('content')
+    @if(Session::has('Success'))
+        <div class="alert alert-success" role="alert">
+            <strong>{{Session::get('Success')}} </strong>
+        </div>
+    @endif
+    @if(Session::has('Error'))
+        <div class="alert alert-danger" role="alert">
+            <strong> {{Session::get('Error')}} </strong>
+        </div>
+    @endif
     <div class="container" style="margin-top:10%">
         <div class="page-header">
             <a href={{URL::asset('albums/'.$album['id'])}}>&laquo; Back to Album</a>
@@ -7,7 +17,7 @@
         <div class="centered-form">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    {{Form::open(['url' => 'albums/'.$album['id'], 'method' => 'DELETE', 'files' =>  'true'])}}
+                    {{Form::open(['url' => 'albums/'.$album['id'], 'method' => 'DELETE'])}}
                     <button class="btn-danger pull-right">Delete Album</button>
                     {{Form::close()}}
                     <div class="panel-heading">
@@ -33,8 +43,20 @@
                             <input type="file" name="photos[]" id="photos" class="form-control input-sm"
                                    placeholder="Upload photos" multiple>
                         </div>
+                        <div class="tz-gallery">
 
-                        <input type="submit" value="Create Album" class="btn btn-info btn-block">
+                            <div class="row">
+                                @foreach($album->photos()->get() as $photo)
+                                    <div class="col-sm-6 col-md-4">
+                                        <a class="lightbox" href="{{URL::Asset('/').$photo->watermarked.'/'.$photo->name}}">
+                                            <img src="{{URL::Asset('/').$photo->watermarked.'/'.$photo->name}}" alt="watermarked">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-info btn-block">
 
                         {{Form::close()}}
                     </div>
